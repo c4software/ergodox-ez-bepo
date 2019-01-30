@@ -12,6 +12,10 @@
 
 extern keymap_config_t keymap_config;
 
+/* Custom variables */
+
+bool capsLock = false;
+
 /* Shortcodes */
 
 #define ___     KC_TRANSPARENT
@@ -87,7 +91,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
      * |   "    |   «  |   »  |   (  |   )  |   @  |      |           |      |   +  |   -  |   /  |   *  |   =  |   %    |
      * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
-     * | Del    |   <  |   >  |   {  |   }  |      |------|           |------|   Ç  |      |   $  |      |      |        |
+     * | Alt    |   <  |   >  |   {  |   }  |      |------|           |------|   Ç  |      |   $  |      |      |        |
      * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
      * | Shift  |      |      |   [  |   ]  |      |      |           |      |      |      |      |      |      |        |
      * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
@@ -106,7 +110,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         // left hand
         ___,     ___,           ___,           ___,           ___,           ___,   ___,
         BP_DQOT, BP_LGIL,       BP_RGIL,       BP_LPRN,       BP_RPRN,       BP_AT, ___,
-        KC_BSPC, LALT(BP_LGIL), LALT(BP_RGIL), LALT(BP_Y),    LALT(BP_X),    XXX,
+        ___,     LALT(BP_LGIL), LALT(BP_RGIL), LALT(BP_Y),    LALT(BP_X),    XXX,
         ___,     XXX,           XXX,           LALT(BP_LPRN), LALT(BP_RPRN), XXX,   ___,
         ___,     ___,           ___,           ___,           _DOWN,
 
@@ -137,7 +141,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
      * | Del    |      |      |      |      |      |------|           |------|      |  4   |  5   |  6   |      |        |
      * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
-     * | Shift  |      |      |      |      |      |      |           |      |      |  1   |  2   |  3   |      |        |
+     * | C.Lock |      |      |      |      |      |      |           |      |      |  1   |  2   |  3   |      |        |
      * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
      *   | Ctl  | MEH  | HYP  | GUI  | DOWN |                                       |  UP  |  .   |  0   |      |      |
      *   `----------------------------------'                                       `----------------------------------'
@@ -155,7 +159,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         ___,     ___, ___, ___,  ___,  ___, ___,
         KC_ESC,  XXX, XXX, XXX,  XXX,  XXX, ___,
         KC_BSPC, XXX, XXX, XXX,  XXX,  XXX,
-        ___,     XXX, XXX, XXX,  XXX,  XXX, ___,
+        KC_CAPS, XXX, XXX, XXX,  XXX,  XXX, ___,
         ___,     ___, ___, ___, _DOWN,
 
                                        ___, ___,
@@ -240,10 +244,24 @@ void matrix_init_user (void) {
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case KC_LSFT:
+            if (capsLock == true) {
+                break;
+            }
             if (record->event.pressed) {
                 ergodox_right_led_1_on();
             } else {
                 ergodox_right_led_1_off();
+            }
+            break;
+        case KC_CAPS:
+            if (record->event.pressed) {
+                if (capsLock == true) {
+                    capsLock = false;
+                    ergodox_right_led_1_off();
+                } else {
+                    capsLock = true;
+                    ergodox_right_led_1_on();
+                }
             }
             break;
         case _DOWN:
@@ -272,5 +290,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             break;
     }
+
     return true;
 }
