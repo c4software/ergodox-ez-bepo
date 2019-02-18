@@ -5,8 +5,8 @@ services:
 
 before_install:
     - docker pull martindamien/qmk_builder
-    - docker run --name builder -v /home/travis/build/martin-damien/ergodox-ez-bepo:/qmk_firmware/keyboards/ergodox_ez/keymaps/ergodox-ez-bepo martindamien/qmk_builder
+    - docker run --name builder -v /home/travis/build/martin-damien/ergodox-ez-bepo:/qmk_firmware/keyboards/ergodox_ez/keymaps/ergodox-ez-bepo martindamien/qmk_builder "tail -f /dev/null"
     - docker ps -a
 
 script:
-    - docker exec -it martindamien/qmk_builder "cd /qmk_firmware ; make ergodox_ez:ergodox-ez-bepo"
+    - docker exec -it builder "cd /qmk_firmware ; make ergodox_ez:ergodox-ez-bepo"
