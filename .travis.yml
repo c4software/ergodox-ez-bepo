@@ -6,7 +6,7 @@ services:
 before_install:
     - docker pull martindamien/qmk_builder
     - docker run --name builder martindamien/qmk_builder "cd /qmk_firmware/keyboards/ergodox_ez/keymaps ; git clone https://github.com/martin-damien/ergodox-ez-bepo.git"
-    - docker ps
+    - docker ps -a
 
 script:
     - docker exec -it martindamien/qmk_builder "cd /qmk_firmware ; make ergodox_ez:ergodox-ez-bepo"
