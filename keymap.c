@@ -37,13 +37,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ,--------------------------------------------------.           ,--------------------------------------------------.
      * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
      * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
-     * | Esc    |   B  |   É  |   P  |   O  |   È  |      |           |      |   ^  |   V  |   D  |   L  |   J  |   Z    |
+     * | Tab    |   B  |   É  |   P  |   O  |   È  |      |           |      |   ^  |   V  |   D  |   L  |   J  |   Z    |
      * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
-     * | Tab    |   A  |   U  |   I  |   E  |   ,  |------|           |------|   C  |   T  |   S  |   R  |   N  |   M    |
+     * | Esc    |   A  |   U  |   I  |   E  |   ,  |------|           |------|   C  |   T  |   S  |   R  |   N  |   M    |
      * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
      * | Shift  |   À  |   Y  |   X  |   .  |   K  |      |           |      |   '  |   Q  |   G  |   H  |   F  |   W    |
      * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
-     *   | Ctl  | MEH  | HYP  | GUI  | DOWN |                                       |  UP  | AltG |      |      |      |
+     *   | Ctl  | MEH  | HYP  | GUI  | DOWN |                                       |  UP  | AltG | MEH  | Left | Right|
      *   `----------------------------------'                                       `----------------------------------'
      *                                        ,-------------.       ,---------------.
      *                                        |      |      |       |      |        |
@@ -57,8 +57,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
         // left hand
         XXX,     XXX,        XXX,        XXX,     XXX,       XXX,        XXX,
-        KC_ESC,  BP_B,       BP_E_ACUTE, BP_P,    BP_O,      BP_E_GRAVE, XXX,
-        KC_TAB,  BP_A,       BP_U,       BP_I,    BP_E,      BP_COMMA,
+        KC_TAB,  BP_B,       BP_E_ACUTE, BP_P,    BP_O,      BP_E_GRAVE, XXX,
+        KC_ESC,  BP_A,       BP_U,       BP_I,    BP_E,      BP_COMMA,
         KC_LSFT, BP_A_GRAVE, BP_Y,       BP_X,    BP_DOT,    BP_K,       XXX,
         KC_LCTL, _MEH,       _HYP,       KC_LGUI, _DOWN,
 
@@ -68,11 +68,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
         // right hand
-        XXX, XXX,     XXX,      XXX,     XXX,     XXX,   XXX,
-        XXX, BP_DCRC, BP_V,     BP_D,    BP_L,    BP_J,  BP_Z,
-             BP_C,    BP_T,     BP_S,    BP_R,    BP_N,  BP_M,
-        XXX, BP_APOS, BP_Q,     BP_G,    BP_H,    BP_F,  BP_W,
-                      _UP,      KC_RALT, XXX,     XXX,   XXX,
+        XXX, XXX,     XXX,      XXX,     XXX,  XXX,     XXX,
+        XXX, BP_DCRC, BP_V,     BP_D,    BP_L, BP_J,    BP_Z,
+             BP_C,    BP_T,     BP_S,    BP_R, BP_N,    BP_M,
+        XXX, BP_APOS, BP_Q,     BP_G,    BP_H, BP_F,    BP_W,
+                      _UP,      KC_RALT, _MEH, KC_LEFT, KC_RIGHT,
 
         XXX, XXX,
         XXX,
@@ -106,13 +106,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         // left hand
         ___,     ___,           ___,           ___,           ___,           ___,   ___,
         BP_DQOT, BP_LGIL,       BP_RGIL,       BP_LPRN,       BP_RPRN,       BP_AT, ___,
-        ___,     LALT(BP_LGIL), LALT(BP_RGIL), LALT(BP_Y),    LALT(BP_X),    XXX,
-        ___,     XXX,           XXX,           LALT(BP_LPRN), LALT(BP_RPRN), XXX,   ___,
+        ___,     RALT(BP_LGIL), RALT(BP_RGIL), RALT(BP_Y),    RALT(BP_X),    XXX,
+        ___,     XXX,           XXX,           RALT(BP_LPRN), RALT(BP_RPRN), XXX,   ___,
         ___,     ___,           ___,           ___,           _DOWN,
 
                                                                                ___, ___,
                                                                                     ___,
-                                                                 LALT(KC_SPC), ___, ___,
+                                                                 RALT(KC_SPC), ___, ___,
 
 
         // right hand
